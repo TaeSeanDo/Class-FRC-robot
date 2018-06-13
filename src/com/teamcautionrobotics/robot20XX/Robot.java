@@ -5,7 +5,7 @@
 /* the project. */
 /*----------------------------------------------------------------------------*/
 
-package com.teamcautionrobotics.misc20XX;
+package com.teamcautionrobotics.robot20XX;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
