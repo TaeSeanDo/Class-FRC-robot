@@ -7,6 +7,9 @@
 
 package com.teamcautionrobotics.robot20XX;
 
+import com.teamcautionrobotics.misc20XX.Gamepad;
+import com.teamcautionrobotics.misc20XX.Gamepad.Button;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -20,13 +23,20 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
+
     private static final String kDefaultAuto = "Default";
     private static final String kCustomAuto = "My Auto";
     private String m_autoSelected;
     private SendableChooser<String> m_chooser = new SendableChooser<>();
+
+    // enhancedjoystick is less sensitive
     Joystick leftJoystick;
     Joystick rightJoystick;
-    DriveBase robotDrive;
+
+    DriveBase driveBase;
+    Gamepad gamePad;
+
+    Intake intake;
 
     /**
      * This function is run when the robot is first started up and should be used for any
@@ -38,9 +48,14 @@ public class Robot extends TimedRobot {
         m_chooser.addObject("My Auto", kCustomAuto);
         SmartDashboard.putData("Auto choices", m_chooser);
 
-        robotDrive = new DriveBase(0, 1);
         leftJoystick = new Joystick(0);
         rightJoystick = new Joystick(1);
+
+        driveBase = new DriveBase(0, 1);
+        gamePad = new Gamepad(2);
+
+        // how to use enum from another class?
+
     }
 
     /**
@@ -78,12 +93,21 @@ public class Robot extends TimedRobot {
         }
     }
 
+    @Override
+    public void teleopInit() {}
+
     /**
      * This function is called periodically during operator control.
      */
     @Override
     public void teleopPeriodic() {
-        robotDrive.drive(leftJoystick.getY(), rightJoystick.getY());
+        driveBase.drive(leftJoystick.getY(), rightJoystick.getY());
+        if (gamePad.getButton(Button.B)) {
+            intake.move(1);
+        }
+        if (gamePad.getButton(Button.X)) {
+            intake.move(-1);
+        }
     }
 
     /**
