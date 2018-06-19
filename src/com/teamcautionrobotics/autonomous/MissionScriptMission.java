@@ -2,7 +2,7 @@
  * A Mission that will load a MissionScript file every time it is run. The MissionScriptMission
  * commands are set by the MissionScript file and updated every time its reset function is called.
  */
-package com.teamcautionrobotics.autonomous20XX;
+package com.teamcautionrobotics.autonomous;
 
 import java.io.IOException;
 import java.nio.file.Files;

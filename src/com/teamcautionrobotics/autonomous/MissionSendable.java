@@ -1,4 +1,4 @@
-package com.teamcautionrobotics.autonomous20XX;
+package com.teamcautionrobotics.autonomous;
 
 import java.util.function.Supplier;
 
