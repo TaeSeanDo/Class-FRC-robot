@@ -23,7 +23,7 @@ public class DriveBase {
 		public void drive(double power) {
 			drive(power, power);
 		}
-			public void drive() {
-				drive(1.0);
-			}
+		public void drive() {
+			drive(1.0);
+		}
 	}
