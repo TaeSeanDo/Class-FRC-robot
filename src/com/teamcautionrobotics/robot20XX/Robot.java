@@ -7,9 +7,14 @@
 
 package com.teamcautionrobotics.robot20XX;
 
+import com.teamcautionrobotics.misc20XX.EnhancedJoystick;
+import com.teamcautionrobotics.misc20XX.Gamepad;
+
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -23,6 +28,12 @@ public class Robot extends TimedRobot {
     private String m_autoSelected;
     private SendableChooser<String> m_chooser = new SendableChooser<>();
 
+    EnhancedJoystick leftJoystick;
+    EnhancedJoystick rightJoystick;
+    
+    DriveBase driveBase;
+    Gamepad gamePad;
+    
     /**
      * This function is run when the robot is first started up and should be used for any
      * initialization code.
@@ -32,6 +43,12 @@ public class Robot extends TimedRobot {
         m_chooser.addDefault("Default Auto", kDefaultAuto);
         m_chooser.addObject("My Auto", kCustomAuto);
         SmartDashboard.putData("Auto choices", m_chooser);
+        
+        leftJoystick = new EnhancedJoystick(0);
+        rightJoystick = new EnhancedJoystick(1);
+        driveBase = new DriveBase(0, 1);
+        gamePad = new Gamepad(2);
+        
     }
 
     /**
@@ -73,8 +90,11 @@ public class Robot extends TimedRobot {
      * This function is called periodically during operator control.
      */
     @Override
-    public void teleopPeriodic() {}
+    public void teleopPeriodic() {
+    	driveBase.drive(leftJoystick.getY(), rightJoystick.getY());
+    }
 
+    
     /**
      * This function is called periodically during test mode.
      */
